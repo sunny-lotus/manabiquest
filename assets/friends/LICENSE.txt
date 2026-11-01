@@ -1,0 +1,5 @@
+CC0 1.0
+Author: Seth Byrd
+Source: https://opengameart.org/node/32326
+Characters.psd: FRONT of groups 1 and 3. Assets.psd: FLAG. Native layers exported to PNG.
+Credit is appreciated but not required.
