@@ -26,7 +26,7 @@ const K="manabiquest-aikotoba";
 const u8=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 async function open_(pw){
   if(!D.ct){
-    const response=await fetch('./game-base.html?v=f7b74f2c');
+    const response=await fetch('./game-base.html?v=c423a116');
     if(!response.ok)throw Error('ゲームを取得できませんでした');
     const packed=await response.text();
     D=JSON.parse(packed.match(/const D=(.*);/)[1]);
