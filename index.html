@@ -8,6 +8,8 @@ h1{margin:0 0 6px;font-size:30px;letter-spacing:.08em;color:#7a4b16}
 p{margin:6px 0 18px;line-height:1.7}
 input{width:100%;box-sizing:border-box;font-size:22px;padding:12px;border:2px solid #c9a46a;border-radius:12px;text-align:center;background:#fffdf6}
 button{margin-top:14px;width:100%;font-size:20px;font-weight:700;padding:12px;border:0;border-radius:999px;background:#8a4b1e;color:#fff;cursor:pointer}
+.portal-return{display:flex;align-items:center;justify-content:center;min-height:44px;margin-top:12px;color:#75451e;font-weight:700;text-decoration:underline}
+.card{box-sizing:border-box}
 #msg{min-height:1.6em;margin:12px 0 0;color:#b03a2e;font-weight:700}
 </style></head><body>
 <form class="card" id="f" autocomplete="off">
@@ -16,6 +18,7 @@ button{margin-top:14px;width:100%;font-size:20px;font-weight:700;padding:12px;bo
 <input id="pw" aria-label="あいことば" placeholder="あいことば">
 <button type="submit">ひらく</button>
 <div id="msg" role="status"></div>
+<a class="portal-return" href="https://sunny-lotus.github.io/manabi-portal/">まなびひろばへ</a>
 </form>
 <script>
 let D={"salt":"btPNt8irkYVYH9urJOZ6zA==","iv":"eTh1kjnw3TEidN5m","it":150000};
@@ -32,7 +35,7 @@ async function open_(pw){
   const key=await crypto.subtle.deriveKey({name:"PBKDF2",salt:u8(D.salt),iterations:D.it,hash:"SHA-256"},base,{name:"AES-GCM",length:256},false,["decrypt"]);
   const z=await crypto.subtle.decrypt({name:"AES-GCM",iv:u8(D.iv)},key,u8(D.ct));
   let html=await new Response(new Blob([z]).stream().pipeThrough(new DecompressionStream("gzip"))).text();
-  const updateResponse=await fetch('./interface-update.json?v=20261101-guide');
+  const updateResponse=await fetch('./interface-update.json?v=20261101-mobile');
   if(!updateResponse.ok)throw Error('画面を取得できませんでした');
   const update=await updateResponse.json();
   const updateBytes=await crypto.subtle.decrypt({name:'AES-GCM',iv:u8(update.iv)},key,u8(update.ct));
