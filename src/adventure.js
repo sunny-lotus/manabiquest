@@ -21,20 +21,21 @@ const oldFinish=finish;
 finish=function(...args){oldFinish(...args);saveLocal();};
 const oldPaintStatus=paintStatus;
 paintStatus=function(){oldPaintStatus();statusEl.querySelector('.tap').textContent='おすと QRコードでセーブ';};
-function monsterHTML(i){
-  const body=['body_greenA','body_blueB','body_redF'][i];
-  return `<div class="monster monster-${i}" aria-label="${ENEMIES[i].name}" role="img"><img class="monster-body" src="${ADVENTURE_ASSETS[body]}" alt=""><img class="monster-eye left" src="${ADVENTURE_ASSETS.eye_cute_dark}" alt=""><img class="monster-eye right" src="${ADVENTURE_ASSETS.eye_cute_dark}" alt=""><img class="monster-mouth" src="${ADVENTURE_ASSETS.mouth_closed_happy}" alt=""></div>`;
-}
-const ENEMIES=[{name:'わすれんぼモス',place:'はじまりの草原',hp:55,attack:12},{name:'もやもやブルー',place:'ひらめきの湖',hp:110,attack:19},{name:'ナゾナゾ大王',place:'まなびの古城',hp:180,attack:27}];
+function monsterHTML(i){return '<img class="friend-portrait" src="'+ADVENTURE_ASSETS['friends_'+FRIENDS[i].key]+'" alt="'+FRIENDS[i].name+'">';}
+const FRIENDS=[{key:'tasenu',name:'タセヌー',subject:'算数',line:'ふたつ合わせると、いくつだぬー？'},{key:'yomenu',name:'ヨメヌー',subject:'国語',line:'このお話のつづきが、よめぬー……'}];
+const ENEMIES=FRIENDS;
+let teachingFriend=null;
+function isFriend(i){return [...cleared].some(n=>subjOf(SETS[n])===FRIENDS[i].subject);}
+function friendScene(i){return '<div class="friend-scene"><img class="scene-cloud" src="'+ADVENTURE_ASSETS.scenery_cloud+'" alt=""><img class="scene-tree" src="'+ADVENTURE_ASSETS.scenery_tree+'" alt=""><img class="scene-flag" src="'+ADVENTURE_ASSETS.scenery_flag+'" alt=""><div class="scene-lion">'+heroHTML()+'</div><div class="scene-friend">'+monsterHTML(i)+'</div></div>';}
 function heroHTML(){return `<img class="hero-lion" src="${STICKERS.hanamaru?.img||Object.values(STICKERS)[0].img}" alt="はなまらいおん">`;}
 function hubHTML(){
   const s=ManabiProgress.stats(subjectXP);
-  return `<section class="adventure-hub"><div class="hub-hero">${heroHTML()}<div><p class="eyebrow">LEARN • GROW • ADVENTURE</p><h2>学びが、ぼうけんの力になる。</h2><p>はなまらいおんと、ナゾの森へ！</p></div></div><div class="growth-grid"><div><span>⚔ こうげき</span><b>${s.attack}</b><small>算数 ${subjectXP['算数']} XP</small></div><div><span>🛡 しゅび</span><b>${s.defense}</b><small>国語 ${subjectXP['国語']} XP</small></div><div><span>🏆 しょうり</span><b>${battleWins}</b><small>学んで、何度もちょうせん</small></div></div><p class="growth-note">算数でこうげき、国語でしゅびがアップ！経験値は使ってもへらないよ。</p><div class="row"><button class="btn gold" data-adventure="battle">⚔ モンスターにちょうせん</button><button class="btn ghost" data-adventure="save">▦ QRセーブ・よみこみ</button></div></section>`;
+  return `<section class="adventure-hub"><div class="hub-hero">${heroHTML()}<div><p class="eyebrow">LEARN • GROW • ADVENTURE</p><h2>学びが、ぼうけんの力になる。</h2><p>はなまらいおんと、ナゾの森へ！</p></div></div><div class="growth-grid"><div><span>算数の力</span><b>${s.attack}</b><small>算数 ${subjectXP['算数']} XP</small></div><div><span>国語の力</span><b>${s.defense}</b><small>国語 ${subjectXP['国語']} XP</small></div><div><span>🤝 なかま</span><b>${FRIENDS.filter((_,i)=>isFriend(i)).length} / 2</b><small>いっしょに学ぶ友だち</small></div></div><p class="growth-note">教科の経験値とステッカーを集めて、仲間との学びを楽しもう。</p><div class="row"><button class="btn gold" data-adventure="battle">🤝 仲間に会いにいく</button><button class="btn ghost" data-adventure="save">▦ QRセーブ・よみこみ</button></div></section>`;
 }
 function mountHub(){
   const box=stage.querySelector('.startbox');if(!box)return;
   box.insertAdjacentHTML('afterbegin',hubHTML());
-  box.querySelector('[data-adventure="battle"]').textContent='⚔ バトルにちょうせん';
+  box.querySelector('[data-adventure="battle"]').textContent='🤝 仲間に会いにいく';
   const legacy=xp-Object.values(subjectXP).reduce((a,b)=>a+b,0);
   if(legacy>0)box.querySelector('.growth-note').insertAdjacentHTML('afterend',`<p class="growth-note">前の記録の ${legacy} XPも合計に残っているよ。教科別の力は、新しく学んだ分から育つよ。</p>`);
   box.querySelector('[data-adventure="battle"]').onclick=chooseBattle;
@@ -47,27 +48,13 @@ const oldWelcome=welcome;welcome=function(){oldWelcome();
   document.getElementById('welcomeQR').onclick=showSpellModal;
 };
 function chooseBattle(){
-  closeModal();gauge.innerHTML='';subjNav.hidden=true;setHead('モンスターの森','学びで育てた力をためそう');
-  stage.innerHTML=`<section class="battle-select"><p class="eyebrow">MONSTER FOREST</p><h2>だれに、ちょうせんする？</h2><p>勝っても負けても学習の記録はへらないよ。何度でもやりなおせる！</p><div class="enemy-cards">${ENEMIES.map((e,i)=>`<button class="enemy-card" data-enemy="${i}">${monsterHTML(i)}<small>${e.place}</small><h3>${e.name}</h3><p>HP ${e.hp} ・ こうげき ${e.attack}</p><span class="btn">ちょうせん →</span></button>`).join('')}</div><button class="btn ghost" id="battleBack">← 学びにもどる</button></section>`;
-  stage.querySelectorAll('[data-enemy]').forEach(b=>b.onclick=()=>{const id=+b.dataset.enemy,s=ManabiProgress.stats(subjectXP);battle={id,hp:s.hp,enemyHP:ENEMIES[id].hp,turn:0,guard:0,ended:false,log:'こうげきする？ それとも、しゅびをかためる？'};renderBattle();});
-  document.getElementById('battleBack').onclick=menu;toTop();
+ closeModal();gauge.innerHTML='';subjNav.hidden=true;setHead('まなびの広場','おしえて、なかまになろう');
+ stage.innerHTML='<section class="friend-select"><p class="eyebrow">LEARNING FRIENDS</p><h2>だれと、いっしょに学ぶ？</h2><p>好きな問題セットを全問せいかいすると、その教科の子が仲間になるよ。<br>まちがえても大丈夫。いっしょに解説を読んで、何度でもためそう。</p><div class="friend-cards">'+FRIENDS.map((f,i)=>'<article class="friend-card">'+monsterHTML(i)+'<h3>'+f.name+'</h3><span class="friend-tag">'+f.subject+'をいっしょに</span><p>「'+f.line+'」</p><p>'+(isFriend(i)?'✓ なかまになったよ！':'まだ出会ったばかり')+'</p><button class="btn gold" data-teach="'+i+'">'+(isFriend(i)?'またいっしょに学ぶ':'おしえてあげる')+'</button></article>').join('')+'</div><button class="btn ghost" id="friendsBack">← 学びにもどる</button></section>';
+ stage.querySelectorAll('[data-teach]').forEach(b=>b.onclick=()=>{teachingFriend=+b.dataset.teach;curSubj=FRIENDS[teachingFriend].subject;curGroup=null;menu();});document.getElementById('friendsBack').onclick=()=>{teachingFriend=null;curSubj=null;menu();};toTop();
 }
-function battleTurn(guard){
-  if(!battle||battle.ended)return;
-  const b=battle,e=ENEMIES[b.id],s=ManabiProgress.stats(subjectXP);b.turn++;
-  if(guard){b.guard=Math.min(2,b.guard+1);b.hp=Math.min(s.hp,b.hp+8);b.log='しゅびをかためて HPを8かいふく！ 次のこうげきが強くなる！';}
-  else{const damage=s.attack+b.guard*6;b.guard=0;b.enemyHP=Math.max(0,b.enemyHP-damage);b.log=`はなまらいおんのこうげき！ ${damage}ダメージ！`;}
-  if(b.enemyHP===0){b.ended=true;battleWins=Math.min(9999,battleWins+1);b.log+=' やったね！ モンスターとなかよくなった！';saveLocal();}
-  else{const strong=b.turn%3===0,damage=Math.max(1,(strong?e.attack+8:e.attack)-s.defense-(guard?10:0));b.hp=Math.max(0,b.hp-damage);b.log+=` ${e.name}の${strong?'大こうげき':'こうげき'}！ ${damage}ダメージ。`;if(b.hp===0){b.ended=true;b.log+=' ひとやすみしよう。国語や算数で力を育てて、また来よう！';}}
-  renderBattle();
-}
-function renderBattle(){
-  const b=battle,e=ENEMIES[b.id],s=ManabiProgress.stats(subjectXP);
-  stage.innerHTML=`<section class="battle-screen"><div class="battle-heading"><p class="eyebrow">${e.place}</p><h2>${b.ended?(b.enemyHP===0?'なかまが、ふえた！':'また、ちょうせんしよう！'):'はなまらいおん VS '+e.name}</h2></div><div class="battle-field"><div class="fighter">${heroHTML()}<b>はなまらいおん</b><label>HP ${b.hp} / ${s.hp}<meter min="0" max="${s.hp}" value="${b.hp}"></meter></label></div><span class="vs">VS</span><div class="fighter">${monsterHTML(b.id)}<b>${e.name}</b><label>HP ${b.enemyHP} / ${e.hp}<meter min="0" max="${e.hp}" value="${b.enemyHP}"></meter></label></div></div><p class="battle-log" role="status" aria-live="polite">${b.log}</p><p>⚔ こうげき ${s.attack}　🛡 しゅび ${s.defense}　ためた力 ${b.guard}/2</p>${!b.ended?`<p class="enemy-intent">次は${(b.turn+1)%3===0?'大こうげき！ しゅびがおすすめ':'ふつうのこうげき'}。しゅびで回復し、次のこうげきに力をためよう。</p><div class="row"><button class="btn gold" id="attack">⚔ こうげき</button><button class="btn" id="guard">🛡 しゅび・かいふく</button></div>`:`<div class="row"><button class="btn gold" id="retryBattle">もう一度あそぶ</button><button class="btn" id="battleSave">QRでセーブ</button></div>`}<button class="btn ghost" id="leaveBattle">← 学びにもどる</button></section>`;
-  if(!b.ended){document.getElementById('attack').onclick=()=>battleTurn(false);document.getElementById('guard').onclick=()=>battleTurn(true);}
-  else{document.getElementById('retryBattle').onclick=chooseBattle;document.getElementById('battleSave').onclick=showSpellModal;}
-  document.getElementById('leaveBattle').onclick=menu;
-}
+const quizStart=start;start=function(i){teachingFriend=FRIENDS.findIndex(f=>f.subject===subjOf(SETS[i]));if(teachingFriend<0)teachingFriend=null;quizStart(i);};
+const quizShow=showQ;showQ=function(){quizShow();if(teachingFriend===null)return;const f=FRIENDS[teachingFriend],right=results.filter(r=>r.ok).length;stage.insertAdjacentHTML('afterbegin','<section class="teaching-banner">'+friendScene(teachingFriend)+'<p><b>'+f.name+'</b>といっしょに '+f.subject+'</p><label>わかった！ '+right+' / '+order.length+'<progress max="'+order.length+'" value="'+right+'"></progress></label></section>');};
+const teachingFinish=finish;finish=function(...args){teachingFinish(...args);if(teachingFriend===null)return;const right=results.filter(r=>r.ok).length,p=stage.querySelector('.teaching-banner label');if(p)p.innerHTML='わかった！ '+right+' / '+order.length+'<progress max="'+order.length+'" value="'+right+'"></progress>';document.getElementById('after').insertAdjacentHTML('afterbegin','<p class="friend-response" role="status">'+FRIENDS[teachingFriend].name+'：'+(args[1]?'なるほど！ 少しわかったぬー！':'いっしょに、もう一度考えるぬー。')+'</p>');};
 // QR images contain the save itself; no account or network request is required.
 showSpellModal=function(){
   closeModal();
@@ -79,7 +66,7 @@ showSpellModal=function(){
   for(let y=0;y<count;y++)for(let x=0;x<count;x++)if(qr.isDark(y,x))ctx.fillRect((x+margin)*scale,(y+margin)*scale,scale,scale);
   canvas.id='saveQR';canvas.setAttribute('role','img');canvas.setAttribute('aria-label','冒険の記録を保存したQRコード');
   const m=document.createElement('dialog');m.id='spellModal';m.className='qr-dialog';
-  m.innerHTML=`<div class="qr-dialog-head"><div><p class="eyebrow">ぼうけんの書</p><h2>QRコードでセーブ</h2></div><button class="btn ghost" id="mClose" aria-label="とじる">✕</button></div><p>合計 ${current.xp} XP ・ 算数 ${current.subjects['算数']} XP ・ 国語 ${current.subjects['国語']} XP ・ 勝利 ${current.wins}回</p><div id="qrCanvas"></div><a class="btn gold" id="downloadQR" download="manabiquest-${new Date().toISOString().slice(0,10)}-${current.xp}xp.png">QR画像をほぞん</a><p>学んだあとは、新しいQRをほぞんしてね。前の画像には、前の記録が入っているよ。</p><hr><h3>QRから、つづきへ</h3><label class="btn ghost qr-file">QR画像をえらぶ<input id="qrFile" type="file" accept="image/*"></label><label class="btn ghost qr-file">カメラでQRをとる<input id="qrCamera" type="file" accept="image/*" capture="environment"></label><p class="qr-status" id="qrStatus" role="status" aria-live="polite"></p><div id="importPreview"></div><details><summary>画像をよめないとき：セーブコード</summary><p>コードをコピーして保存し、下にはりつけても再開できるよ。</p><textarea id="saveCode" readonly aria-label="保存用セーブコード"></textarea><button class="btn ghost" id="copySaveCode">コードをコピー</button><textarea id="importCode" aria-label="読み込むセーブコード" placeholder="MQ2: ではじまるコード"></textarea><button class="btn" id="readSaveCode">コードをよみこむ</button></details><details><summary>以前のふっかつのじゅもん</summary><p>古いじゅもんでは、教科別の経験値とバトル記録は保存できません。新しい記録にはQRを使ってね。</p><input id="mSpell" readonly aria-label="以前の形式のじゅもん"><button class="btn ghost" id="mCopy">じゅもんをコピー</button><span id="mMsg" hidden></span></details><p class="asset-credit">敵の素材：<a href="https://kenney.nl/assets/monster-builder-pack" target="_blank" rel="noopener">Kenney / CC0</a></p>`;
+  m.innerHTML=`<div class="qr-dialog-head"><div><p class="eyebrow">ぼうけんの書</p><h2>QRコードでセーブ</h2></div><button class="btn ghost" id="mClose" aria-label="とじる">✕</button></div><p>合計 ${current.xp} XP ・ 算数 ${current.subjects['算数']} XP ・ 国語 ${current.subjects['国語']} XP ・ 勝利 ${current.wins}回</p><div id="qrCanvas"></div><a class="btn gold" id="downloadQR" download="manabiquest-${new Date().toISOString().slice(0,10)}-${current.xp}xp.png">QR画像をほぞん</a><p>学んだあとは、新しいQRをほぞんしてね。前の画像には、前の記録が入っているよ。</p><hr><h3>QRから、つづきへ</h3><label class="btn ghost qr-file">QR画像をえらぶ<input id="qrFile" type="file" accept="image/*"></label><label class="btn ghost qr-file">カメラでQRをとる<input id="qrCamera" type="file" accept="image/*" capture="environment"></label><p class="qr-status" id="qrStatus" role="status" aria-live="polite"></p><div id="importPreview"></div><details><summary>画像をよめないとき：セーブコード</summary><p>コードをコピーして保存し、下にはりつけても再開できるよ。</p><textarea id="saveCode" readonly aria-label="保存用セーブコード"></textarea><button class="btn ghost" id="copySaveCode">コードをコピー</button><textarea id="importCode" aria-label="読み込むセーブコード" placeholder="MQ2: ではじまるコード"></textarea><button class="btn" id="readSaveCode">コードをよみこむ</button></details><details><summary>以前のふっかつのじゅもん</summary><p>古いじゅもんでは、教科別の経験値とバトル記録は保存できません。新しい記録にはQRを使ってね。</p><input id="mSpell" readonly aria-label="以前の形式のじゅもん"><button class="btn ghost" id="mCopy">じゅもんをコピー</button><span id="mMsg" hidden></span></details><p class="asset-credit">仲間・小物：<a href="https://opengameart.org/node/32326" target="_blank" rel="noopener">Seth Byrd / CC0</a></p>`;
   document.body.appendChild(m);document.getElementById('qrCanvas').appendChild(canvas);document.getElementById('downloadQR').href=canvas.toDataURL('image/png');document.getElementById('saveCode').value=payload;document.getElementById('mSpell').value=encodeAll(current.xp,new Set(current.got)).join(' ');
   let importing=false;
   const status=()=>m.querySelector('#qrStatus');
@@ -103,6 +90,9 @@ showSpellModal=function(){
 };
 const oldShowResult=showResult;
 showResult=function(){oldShowResult();
-  const box=stage.querySelector('.spellbox');box.innerHTML='<h3>学んだ力を、QRで持っていこう。</h3><p>この端末には自動保存したよ。ほかの端末であそぶときはQRをほぞんしよう。</p><button class="btn gold" id="resultQR">QRでセーブ</button><button class="btn" id="resultBattle">育った力でバトル</button>';
+  const box=stage.querySelector('.spellbox');box.innerHTML='<h3>学んだ力を、QRで持っていこう。</h3><p>この端末には自動保存したよ。ほかの端末であそぶときはQRをほぞんしよう。</p><button class="btn gold" id="resultQR">QRでセーブ</button><button class="btn" id="resultBattle">仲間に会いにいく</button>';
   box.querySelector('#resultQR').onclick=showSpellModal;box.querySelector('#resultBattle').onclick=chooseBattle;
 };
+
+const resultWithFriends=showResult;showResult=function(){resultWithFriends();if(teachingFriend===null)return;const f=FRIENDS[teachingFriend],perfect=results.every(r=>r.ok);stage.insertAdjacentHTML('afterbegin','<section class="friend-celebration">'+friendScene(teachingFriend)+'<h2>'+(perfect?f.name+'が仲間になった！':'いっしょに学べて、うれしいぬー！')+'</h2><p>'+(perfect?'「わかったぬー！ これからもいっしょに学ぶぬー！」':'もう一度ためして、わかった！をふやそう。')+'</p></section>');};
+const mountWithAssets=mountHub;mountHub=function(){mountWithAssets();const hub=stage.querySelector('.adventure-hub');if(hub)hub.insertAdjacentHTML('afterbegin',friendScene(0));document.documentElement.style.setProperty('--asset-button','url("'+ADVENTURE_ASSETS.ui_button+'")');};

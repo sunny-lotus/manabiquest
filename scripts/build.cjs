@@ -17,7 +17,7 @@ if(!html.includes('/* adventure-save-v2 */')){
   ];
   for(const [a,b]of replacements){if(!html.includes(a))throw Error('Legacy integration point missing: '+a);html=html.replace(a,b);}
 }
-const assets={};for(const f of fs.readdirSync('assets/monsters'))if(f.endsWith('.png'))assets[f.slice(0,-4)]='data:image/png;base64,'+fs.readFileSync('assets/monsters/'+f).toString('base64');
+const assets={};for(const folder of ['monsters','friends','scenery','ui'])for(const f of fs.readdirSync('assets/'+folder))if(f.endsWith('.png'))assets[(folder==='monsters'?'':folder+'_')+f.slice(0,-4)]='data:image/png;base64,'+fs.readFileSync('assets/'+folder+'/'+f).toString('base64');
 const runtime=['vendor/qrcode.js','vendor/jsQR.js','src/progress.js'].map(f=>fs.readFileSync(f,'utf8')).join('\n;\n')+'\nconst ADVENTURE_ASSETS='+JSON.stringify(assets)+';\n'+fs.readFileSync('src/adventure.js','utf8');
 html=html.replace('</head>','<!-- adventure-styles-start --><style>'+fs.readFileSync('src/adventure.css','utf8')+'</style><!-- adventure-styles-end --></head>');
 html=html.replace(/\nwelcome\(\);\s*<\/script>/,()=> '\n/* adventure-runtime-start */\n'+runtime+'\n/* adventure-runtime-end */\nwelcome();\n</script>');
