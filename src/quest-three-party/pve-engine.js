@@ -1,6 +1,7 @@
 /* CPU adventure adapter. Round resolution is the unmodified ChampionsRules module. */
 ChampionsParty.configure(ManabiRoster.companions,ManabiCompanionSkills);
 const QuestPartySkills=ChampionsParty.skills();
+ManabiCompanionSkills.forEach((skill,id)=>Object.assign(skill,QuestPartySkills[id],{move:{...QuestPartySkills[id].move}}));
 const QuestStickerCatalog=SETS.map((s,i)=>({subject:subjOf(s),name:stk(i).name}));
 ChampionsElements.configure(QuestStickerCatalog,ManabiRoster.companions);
 let questFollowers=null;
