@@ -12,3 +12,5 @@ body.in-battle .sound-toolbar{display:none!important}.quest-focus .depth-front{d
 .quest-weakness-label{display:block;margin:4px 0;color:#725437;font-size:12px}.quest-weakness-label .quest-subject{font-size:12px;padding:1px 5px}.quest-weakness-label .game-icon{width:16px;height:16px}
 body.in-battle .wrap{box-sizing:border-box!important}
 .quest-focus .scene-lion,.quest-focus .scene-ally,.quest-focus .scene-friend{bottom:128px!important}@media(max-width:620px){.quest-focus .scene-lion,.quest-focus .scene-ally,.quest-focus .scene-friend{bottom:150px!important}}
+
+.quest-focus .scene-friend .roster-normalized .roster-window{position:absolute;left:50%!important;bottom:0!important;height:160px!important;width:calc(160px * var(--sprite-aspect))!important;transform:translateX(-50%)!important;margin:0!important;max-width:none}@media(max-width:620px){.quest-focus .scene-friend .roster-normalized .roster-window{height:90px!important;width:calc(90px * var(--sprite-aspect))!important}}
