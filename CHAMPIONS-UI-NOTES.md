@@ -1,3 +1,5 @@
+> This describes the earlier UI-only migration. The current 3-character CPU battle supersedes the one-companion battle below; see [THREE-PARTY-NOTES.md](THREE-PARTY-NOTES.md).
+
 # Champions UI adaptation
 
 Appended to the existing encrypted interface update, preserving current music, question layout and base game. Source: src/champions-ui.js / src/champions-ui.css.
