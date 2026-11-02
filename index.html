@@ -35,7 +35,7 @@ async function open_(pw){
   const key=await crypto.subtle.deriveKey({name:"PBKDF2",salt:u8(D.salt),iterations:D.it,hash:"SHA-256"},base,{name:"AES-GCM",length:256},false,["decrypt"]);
   const z=await crypto.subtle.decrypt({name:"AES-GCM",iv:u8(D.iv)},key,u8(D.ct));
   let html=await new Response(new Blob([z]).stream().pipeThrough(new DecompressionStream("gzip"))).text();
-  const updateResponse=await fetch('./interface-update.json?v=20261102-minor-entrance');
+  const updateResponse=await fetch('./interface-update.json?v=20261102-champions-ui');
   if(!updateResponse.ok)throw Error('画面を取得できませんでした');
   const update=await updateResponse.json();
   const updateBytes=await crypto.subtle.decrypt({name:'AES-GCM',iv:u8(update.iv)},key,u8(update.ct));
