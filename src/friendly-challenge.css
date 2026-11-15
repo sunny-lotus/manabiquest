@@ -1,0 +1,16 @@
+/* No falling, disappearing, slash or hit reaction; celebrate everybody. */
+.fx-slash,.fx-impact,.fx-shard,.fx-projectile{display:none!important}
+.fx-receiving{animation:none!important;filter:drop-shadow(0 0 8px #ffe7ac)}
+.battle-fx-layer:after{content:'✦';position:absolute;left:var(--x,48%);top:32%;font-size:48px;color:#ffeb9b;text-shadow:0 0 18px #ffe8a2;animation:friendly-spark .6s ease-out both}
+.challenge-applause{text-align:center;font-weight:bold;padding:12px 16px;border:2px solid #cda85d;border-radius:14px;background:#fff4cd;color:#594322;line-height:1.6}
+.challenge-finished .pve-actor,.challenge-finished .fighter{opacity:1!important;visibility:visible!important}
+.challenge-finished .pve-sprite,.challenge-finished .character-pick{animation:friendly-bow 1.8s ease-in-out 2!important;transform-origin:50% 100%}
+.pve-team.enemy .pve-sprite img{filter:none!important}.pve-team.enemy .pve-sprite{opacity:1!important;filter:none!important}
+.pve-strike-burst{background:none!important;width:36px!important;height:36px!important;border-radius:50%;border:2px solid #ffea9a;box-shadow:0 0 14px #ffecad}
+.pve-hp.enemy .pve-meter:not(.mp)>i{background:linear-gradient(90deg,#f4b85d,#ffe396)!important}
+.pve-outcome{font-size:clamp(17px,4.5vw,30px)!important;max-width:86%;text-align:center;line-height:1.5}
+.status-bar-row{grid-template-columns:48px 1fr 88px}
+.victory-banner strong{font-size:clamp(16px,4vw,27px)!important;letter-spacing:0!important}
+@keyframes friendly-spark{from{opacity:0;transform:scale(.5)}40%{opacity:1}to{opacity:0;transform:translateY(-20px) scale(1.2)}}
+@keyframes friendly-bow{0%,100%{rotate:0deg}35%{rotate:4deg}65%{rotate:-3deg}}
+@media(prefers-reduced-motion:reduce){.challenge-finished .pve-sprite,.challenge-finished .character-pick,.battle-fx-layer:after{animation:none!important}}

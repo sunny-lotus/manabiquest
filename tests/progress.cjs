@@ -1,5 +1,5 @@
 const {test}=require('node:test'),assert=require('node:assert/strict');
-const P=require('../src/progress.js');
+const P=require('../src/adventure-progress.js');
 const sample={v:2,xp:1025,got:[0,2,31],subjects:{'算数':500,'国語':300,'社会':100,'理科':125},wins:9};
 test('QR save round-trips every progress field',()=>assert.deepEqual(P.decode(P.encode(sample,60),60),sample));
 test('zero and capped saves round-trip',()=>{for(const x of [0,32767]){const d={...sample,xp:x,got:[],subjects:{'算数':x,'国語':0,'社会':0,'理科':0},wins:9999};assert.deepEqual(P.decode(P.encode(d,60),60),d);}});

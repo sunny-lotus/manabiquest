@@ -1,0 +1,650 @@
+{
+  "tempo": 116,
+  "beats": 16,
+  "events": [
+    {
+      "instrument": "brass-high",
+      "midi": 72,
+      "beat": 0,
+      "hold": 0.5,
+      "gain": 0.42
+    },
+    {
+      "instrument": "brass-high",
+      "midi": 76,
+      "beat": 0.5,
+      "hold": 0.5,
+      "gain": 0.42
+    },
+    {
+      "instrument": "brass-high",
+      "midi": 79,
+      "beat": 1,
+      "hold": 1,
+      "gain": 0.42
+    },
+    {
+      "instrument": "brass-high",
+      "midi": 76,
+      "beat": 2,
+      "hold": 1,
+      "gain": 0.42
+    },
+    {
+      "instrument": "brass-high",
+      "midi": 79,
+      "beat": 3,
+      "hold": 1,
+      "gain": 0.42
+    },
+    {
+      "instrument": "brass-high",
+      "midi": 81,
+      "beat": 4,
+      "hold": 1,
+      "gain": 0.42
+    },
+    {
+      "instrument": "brass-high",
+      "midi": 79,
+      "beat": 5,
+      "hold": 1,
+      "gain": 0.42
+    },
+    {
+      "instrument": "brass-high",
+      "midi": 77,
+      "beat": 6,
+      "hold": 0.5,
+      "gain": 0.42
+    },
+    {
+      "instrument": "brass-high",
+      "midi": 76,
+      "beat": 6.5,
+      "hold": 0.5,
+      "gain": 0.42
+    },
+    {
+      "instrument": "brass-high",
+      "midi": 74,
+      "beat": 7,
+      "hold": 1,
+      "gain": 0.42
+    },
+    {
+      "instrument": "brass-high",
+      "midi": 74,
+      "beat": 8,
+      "hold": 0.5,
+      "gain": 0.42
+    },
+    {
+      "instrument": "flute",
+      "midi": 62,
+      "beat": 8.025,
+      "hold": 0.5,
+      "gain": 0.12
+    },
+    {
+      "instrument": "brass-high",
+      "midi": 79,
+      "beat": 8.5,
+      "hold": 0.5,
+      "gain": 0.42
+    },
+    {
+      "instrument": "flute",
+      "midi": 67,
+      "beat": 8.525,
+      "hold": 0.5,
+      "gain": 0.12
+    },
+    {
+      "instrument": "brass-high",
+      "midi": 83,
+      "beat": 9,
+      "hold": 1,
+      "gain": 0.42
+    },
+    {
+      "instrument": "flute",
+      "midi": 71,
+      "beat": 9.025,
+      "hold": 1,
+      "gain": 0.12
+    },
+    {
+      "instrument": "brass-high",
+      "midi": 84,
+      "beat": 10,
+      "hold": 0.5,
+      "gain": 0.42
+    },
+    {
+      "instrument": "flute",
+      "midi": 72,
+      "beat": 10.025,
+      "hold": 0.5,
+      "gain": 0.12
+    },
+    {
+      "instrument": "brass-high",
+      "midi": 83,
+      "beat": 10.5,
+      "hold": 0.5,
+      "gain": 0.42
+    },
+    {
+      "instrument": "flute",
+      "midi": 71,
+      "beat": 10.525,
+      "hold": 0.5,
+      "gain": 0.12
+    },
+    {
+      "instrument": "brass-high",
+      "midi": 81,
+      "beat": 11,
+      "hold": 1,
+      "gain": 0.42
+    },
+    {
+      "instrument": "flute",
+      "midi": 69,
+      "beat": 11.025,
+      "hold": 1,
+      "gain": 0.12
+    },
+    {
+      "instrument": "brass-high",
+      "midi": 76,
+      "beat": 12,
+      "hold": 0.5,
+      "gain": 0.42
+    },
+    {
+      "instrument": "flute",
+      "midi": 64,
+      "beat": 12.025,
+      "hold": 0.5,
+      "gain": 0.12
+    },
+    {
+      "instrument": "brass-high",
+      "midi": 79,
+      "beat": 12.5,
+      "hold": 0.5,
+      "gain": 0.42
+    },
+    {
+      "instrument": "flute",
+      "midi": 67,
+      "beat": 12.525,
+      "hold": 0.5,
+      "gain": 0.12
+    },
+    {
+      "instrument": "brass-high",
+      "midi": 84,
+      "beat": 13,
+      "hold": 2.8,
+      "gain": 0.5
+    },
+    {
+      "instrument": "flute",
+      "midi": 72,
+      "beat": 13.025,
+      "hold": 2.8,
+      "gain": 0.12
+    },
+    {
+      "instrument": "strings",
+      "midi": 60,
+      "beat": 0.0,
+      "hold": 0.42,
+      "gain": 0.15
+    },
+    {
+      "instrument": "strings",
+      "midi": 64,
+      "beat": 0.5,
+      "hold": 0.42,
+      "gain": 0.11
+    },
+    {
+      "instrument": "strings",
+      "midi": 67,
+      "beat": 1.0,
+      "hold": 0.42,
+      "gain": 0.15
+    },
+    {
+      "instrument": "strings",
+      "midi": 60,
+      "beat": 1.5,
+      "hold": 0.42,
+      "gain": 0.11
+    },
+    {
+      "instrument": "strings",
+      "midi": 64,
+      "beat": 2.0,
+      "hold": 0.42,
+      "gain": 0.15
+    },
+    {
+      "instrument": "strings",
+      "midi": 67,
+      "beat": 2.5,
+      "hold": 0.42,
+      "gain": 0.11
+    },
+    {
+      "instrument": "strings",
+      "midi": 60,
+      "beat": 3.0,
+      "hold": 0.42,
+      "gain": 0.15
+    },
+    {
+      "instrument": "strings",
+      "midi": 64,
+      "beat": 3.5,
+      "hold": 0.42,
+      "gain": 0.11
+    },
+    {
+      "instrument": "bass",
+      "midi": 48,
+      "beat": 0,
+      "hold": 0.7,
+      "gain": 0.32
+    },
+    {
+      "instrument": "drum",
+      "midi": 48,
+      "beat": 0,
+      "hold": 1.0,
+      "gain": 0.24
+    },
+    {
+      "instrument": "bass",
+      "midi": 48,
+      "beat": 2,
+      "hold": 0.7,
+      "gain": 0.32
+    },
+    {
+      "instrument": "drum",
+      "midi": 48,
+      "beat": 2,
+      "hold": 1.0,
+      "gain": 0.17
+    },
+    {
+      "instrument": "brass-low",
+      "midi": 60,
+      "beat": 0,
+      "hold": 0.6,
+      "gain": 0.07
+    },
+    {
+      "instrument": "brass-low",
+      "midi": 64,
+      "beat": 0,
+      "hold": 0.6,
+      "gain": 0.07
+    },
+    {
+      "instrument": "brass-low",
+      "midi": 67,
+      "beat": 0,
+      "hold": 0.6,
+      "gain": 0.07
+    },
+    {
+      "instrument": "strings",
+      "midi": 60,
+      "beat": 4.0,
+      "hold": 0.42,
+      "gain": 0.15
+    },
+    {
+      "instrument": "strings",
+      "midi": 65,
+      "beat": 4.5,
+      "hold": 0.42,
+      "gain": 0.11
+    },
+    {
+      "instrument": "strings",
+      "midi": 69,
+      "beat": 5.0,
+      "hold": 0.42,
+      "gain": 0.15
+    },
+    {
+      "instrument": "strings",
+      "midi": 60,
+      "beat": 5.5,
+      "hold": 0.42,
+      "gain": 0.11
+    },
+    {
+      "instrument": "strings",
+      "midi": 65,
+      "beat": 6.0,
+      "hold": 0.42,
+      "gain": 0.15
+    },
+    {
+      "instrument": "strings",
+      "midi": 69,
+      "beat": 6.5,
+      "hold": 0.42,
+      "gain": 0.11
+    },
+    {
+      "instrument": "strings",
+      "midi": 60,
+      "beat": 7.0,
+      "hold": 0.42,
+      "gain": 0.15
+    },
+    {
+      "instrument": "strings",
+      "midi": 65,
+      "beat": 7.5,
+      "hold": 0.42,
+      "gain": 0.11
+    },
+    {
+      "instrument": "bass",
+      "midi": 53,
+      "beat": 4,
+      "hold": 0.7,
+      "gain": 0.32
+    },
+    {
+      "instrument": "drum",
+      "midi": 53,
+      "beat": 4,
+      "hold": 1.0,
+      "gain": 0.24
+    },
+    {
+      "instrument": "bass",
+      "midi": 53,
+      "beat": 6,
+      "hold": 0.7,
+      "gain": 0.32
+    },
+    {
+      "instrument": "drum",
+      "midi": 53,
+      "beat": 6,
+      "hold": 1.0,
+      "gain": 0.17
+    },
+    {
+      "instrument": "brass-low",
+      "midi": 60,
+      "beat": 4,
+      "hold": 0.6,
+      "gain": 0.07
+    },
+    {
+      "instrument": "brass-low",
+      "midi": 65,
+      "beat": 4,
+      "hold": 0.6,
+      "gain": 0.07
+    },
+    {
+      "instrument": "brass-low",
+      "midi": 69,
+      "beat": 4,
+      "hold": 0.6,
+      "gain": 0.07
+    },
+    {
+      "instrument": "strings",
+      "midi": 59,
+      "beat": 8.0,
+      "hold": 0.42,
+      "gain": 0.15
+    },
+    {
+      "instrument": "strings",
+      "midi": 62,
+      "beat": 8.5,
+      "hold": 0.42,
+      "gain": 0.11
+    },
+    {
+      "instrument": "strings",
+      "midi": 67,
+      "beat": 9.0,
+      "hold": 0.42,
+      "gain": 0.15
+    },
+    {
+      "instrument": "strings",
+      "midi": 59,
+      "beat": 9.5,
+      "hold": 0.42,
+      "gain": 0.11
+    },
+    {
+      "instrument": "strings",
+      "midi": 62,
+      "beat": 10.0,
+      "hold": 0.42,
+      "gain": 0.15
+    },
+    {
+      "instrument": "strings",
+      "midi": 67,
+      "beat": 10.5,
+      "hold": 0.42,
+      "gain": 0.11
+    },
+    {
+      "instrument": "strings",
+      "midi": 59,
+      "beat": 11.0,
+      "hold": 0.42,
+      "gain": 0.15
+    },
+    {
+      "instrument": "strings",
+      "midi": 62,
+      "beat": 11.5,
+      "hold": 0.42,
+      "gain": 0.11
+    },
+    {
+      "instrument": "bass",
+      "midi": 55,
+      "beat": 8,
+      "hold": 0.7,
+      "gain": 0.32
+    },
+    {
+      "instrument": "drum",
+      "midi": 55,
+      "beat": 8,
+      "hold": 1.0,
+      "gain": 0.24
+    },
+    {
+      "instrument": "bass",
+      "midi": 55,
+      "beat": 10,
+      "hold": 0.7,
+      "gain": 0.32
+    },
+    {
+      "instrument": "drum",
+      "midi": 55,
+      "beat": 10,
+      "hold": 1.0,
+      "gain": 0.17
+    },
+    {
+      "instrument": "brass-low",
+      "midi": 59,
+      "beat": 8,
+      "hold": 0.6,
+      "gain": 0.07
+    },
+    {
+      "instrument": "brass-low",
+      "midi": 62,
+      "beat": 8,
+      "hold": 0.6,
+      "gain": 0.07
+    },
+    {
+      "instrument": "brass-low",
+      "midi": 67,
+      "beat": 8,
+      "hold": 0.6,
+      "gain": 0.07
+    },
+    {
+      "instrument": "strings",
+      "midi": 60,
+      "beat": 12.0,
+      "hold": 0.42,
+      "gain": 0.15
+    },
+    {
+      "instrument": "strings",
+      "midi": 64,
+      "beat": 12.5,
+      "hold": 0.42,
+      "gain": 0.11
+    },
+    {
+      "instrument": "strings",
+      "midi": 67,
+      "beat": 13.0,
+      "hold": 0.42,
+      "gain": 0.15
+    },
+    {
+      "instrument": "strings",
+      "midi": 60,
+      "beat": 13.5,
+      "hold": 0.42,
+      "gain": 0.11
+    },
+    {
+      "instrument": "strings",
+      "midi": 64,
+      "beat": 14.0,
+      "hold": 0.42,
+      "gain": 0.15
+    },
+    {
+      "instrument": "strings",
+      "midi": 67,
+      "beat": 14.5,
+      "hold": 0.42,
+      "gain": 0.11
+    },
+    {
+      "instrument": "strings",
+      "midi": 60,
+      "beat": 15.0,
+      "hold": 0.42,
+      "gain": 0.15
+    },
+    {
+      "instrument": "strings",
+      "midi": 64,
+      "beat": 15.5,
+      "hold": 0.42,
+      "gain": 0.11
+    },
+    {
+      "instrument": "bass",
+      "midi": 48,
+      "beat": 12,
+      "hold": 0.7,
+      "gain": 0.32
+    },
+    {
+      "instrument": "drum",
+      "midi": 48,
+      "beat": 12,
+      "hold": 1.0,
+      "gain": 0.24
+    },
+    {
+      "instrument": "bass",
+      "midi": 48,
+      "beat": 14,
+      "hold": 0.7,
+      "gain": 0.32
+    },
+    {
+      "instrument": "drum",
+      "midi": 48,
+      "beat": 14,
+      "hold": 1.0,
+      "gain": 0.17
+    },
+    {
+      "instrument": "brass-low",
+      "midi": 60,
+      "beat": 12,
+      "hold": 0.6,
+      "gain": 0.07
+    },
+    {
+      "instrument": "brass-low",
+      "midi": 64,
+      "beat": 12,
+      "hold": 0.6,
+      "gain": 0.07
+    },
+    {
+      "instrument": "brass-low",
+      "midi": 67,
+      "beat": 12,
+      "hold": 0.6,
+      "gain": 0.07
+    },
+    {
+      "instrument": "bells",
+      "midi": 72,
+      "beat": 13.02,
+      "hold": 5,
+      "gain": 0.1
+    },
+    {
+      "instrument": "bells",
+      "midi": 76,
+      "beat": 13.02,
+      "hold": 5,
+      "gain": 0.1
+    },
+    {
+      "instrument": "bells",
+      "midi": 79,
+      "beat": 13.02,
+      "hold": 5,
+      "gain": 0.1
+    },
+    {
+      "instrument": "bells",
+      "midi": 84,
+      "beat": 13.02,
+      "hold": 5,
+      "gain": 0.1
+    }
+  ]
+}
