@@ -1,0 +1,4 @@
+game.source.html
+.env
+node_modules/
+test-results/
